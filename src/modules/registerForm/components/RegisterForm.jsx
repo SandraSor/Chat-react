@@ -10,9 +10,23 @@ import {
 } from '@ant-design/icons';
 
 import { Block, Button } from '../../../components';
+import { validateField } from '../../../utils/helpers';
 
-const RegisterForm = () => {
-	const success = true;
+const success = false;
+
+const RegisterForm = (props) => {
+	const {
+		values,
+		touched,
+		errors,
+		isSubmitting,
+		handleChange,
+		handleBlur,
+		handleSubmit,
+		handleReset,
+		dirty,
+		isValid,
+	} = props;
 
 	const onFinish = (values) => {
 		console.log('Received values of form: ', values);
@@ -29,30 +43,29 @@ const RegisterForm = () => {
 					<Form
 						name='normal_login'
 						className='login-form'
-						initialValues={{ remember: true }}
-						onFinish={onFinish}
+						onSubmit={handleSubmit}
+						// onFinish={onFinish}
 					>
 						<Form.Item
-							name='mail'
-							rules={[
-								{ required: true, message: 'Please input your Username!' },
-							]}
+							name='email'
 							hasFeedback
-							validateStatus='success'
+							validateStatus={validateField('email', touched, errors)}
+							help={!touched.email ? '' : errors.email}
 						>
 							<Input
+								id='email'
 								prefix={<MailOutlined className='site-form-item-icon' />}
 								placeholder='E-mail'
 								size='large'
+								value={values.email}
+								onChange={handleChange}
+								onBlur={handleBlur}
 							/>
 						</Form.Item>
 						<Form.Item
 							name='username'
-							rules={[
-								{ required: true, message: 'Please input your Username!' },
-							]}
-							hasFeedback
-							validateStatus='success'
+							// hasFeedback
+							// validateStatus='success'
 						>
 							<Input
 								prefix={<UserOutlined className='site-form-item-icon' />}
@@ -63,39 +76,45 @@ const RegisterForm = () => {
 
 						<Form.Item
 							name='password'
-							rules={[
-								{ required: true, message: 'Please input your Password!' },
-							]}
-							// hasFeedback
-							// validateStatus='success'
+							hasFeedback
+							validateStatus={validateField('password', touched, errors)}
+							help={!touched.password ? '' : errors.password}
 						>
-							<Input
+							<Input.Password
+								id='password'
 								prefix={<LockOutlined className='site-form-item-icon' />}
-								type='password'
+								// type='password'
 								placeholder='Пароль'
 								size='large'
+								value={values.password}
+								onChange={handleChange}
+								onBlur={handleBlur}
 							/>
 						</Form.Item>
+
 						<Form.Item
-							name='password'
-							rules={[
-								{ required: true, message: 'Please input your Password!' },
-							]}
-							// hasFeedback
-							// validateStatus='success'
+							name='confirm'
+							hasFeedback
+							validateStatus={validateField('confirm', touched, errors)}
+							help={!touched.confirm ? '' : errors.confirm}
 						>
-							<Input
+							<Input.Password
+								id='confirm'
 								prefix={<LockOutlined className='site-form-item-icon' />}
-								type='password'
 								placeholder='Повторите пароль'
 								size='large'
+								value={values.confirm}
+								onChange={handleChange}
+								onBlur={handleBlur}
 							/>
 						</Form.Item>
 
 						<Form.Item>
+							{isSubmitting && !isValid && <span>Error date</span>}
 							<Button
 								type='primary'
 								htmlType='submit'
+								onClick={handleSubmit}
 								className='login-form-button'
 								size='large'
 							>

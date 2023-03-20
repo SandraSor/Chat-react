@@ -1,11 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Auth } from './pages';
+
+import { Auth, Home } from './pages';
 
 const App = () => {
 	return (
 		<BrowserRouter>
 			<div className='wrapper'>
-				<Auth />
+				<Routes>
+					<Route path='*' element={<Auth />} />
+					<Route path='/in' element={<Home />} />
+				</Routes>
 			</div>
 		</BrowserRouter>
 	);
