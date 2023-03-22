@@ -1,12 +1,49 @@
 import React from 'react';
-import { Message, DialogItem } from '../../components';
+import { Dialogs, Message, DialogItem } from '../../components';
 
 import './Home.scss';
 
 const Home = () => {
 	return (
 		<section className='home'>
-			<div className='dialogs'>
+			<Dialogs
+				myId={1}
+				items={[
+					{
+						_id: Math.random(),
+						user: {
+							_id: 1,
+							fullName: 'Дядя Федя',
+							avatar: null,
+							isOnline: true,
+						},
+						text: 'Это официальный интернет-магазин кофе и чая Tasty Coffee.',
+						// isRead: false,
+						// created_at: 'Tue Mar 21 2023 14:26:42',
+						created_at: 'Tue Feb 11 2014 12:33:18',
+					},
+					{
+						_id: Math.random(),
+						user: {
+							_id: 2,
+							fullName: 'Сергей Есенин',
+							avatar:
+								'https://cdn.culture.ru/images/86fc0c4f-2257-510d-a691-49a040f76e73/w_100,h_100,c_fill,g_attention/0.jpg',
+							isOnline: false,
+						},
+						text: 'Не жалею, не зову, не плачу, все пройдет, как с белых яблонь дым.',
+						// isRead: false,
+						created_at: 'Tue Mar 21 2023 14:26:42',
+						// created_at: 'Tue Feb 11 2014 12:33:18',
+					},
+				]}
+			/>
+			<Message
+				avatar='https://sun9-79.userapi.com/c4300/u134167906/d_65f3c1c4.jpg'
+				date='Sat Mar 19 2023 18:20:10'
+				audio='https://assets.mixkit.co/active_storage/sfx/937/937-preview.mp3'
+			/>
+			{/* <div className='dialogs'>
 				<DialogItem
 					user={{
 						fullName: 'Федор Достаевский',
@@ -32,22 +69,8 @@ const Home = () => {
 					}}
 					unReaded={99}
 				/>
-			</div>
-			{/* <Dialogs
-				item={[
-					{
-						user: {
-							fullName: 'Дядя Федя',
-							avatar: null,
-						},
-						message: {
-							text: 'Это официальный интернет-магазин кофе и чая Tasty Coffee.',
-							isRead: false,
-							created_at: new Date(),
-						},
-					},
-				]}
-			/> */}
+			</div> */}
+
 			{/* <Message
 				avatar='https://sun9-79.userapi.com/c4300/u134167906/d_65f3c1c4.jpg'
 				text='Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях, лол 🌝'
