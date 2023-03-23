@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { Time, IconReaded } from '../';
+import { Time, IconReaded, Avatar } from '../';
 import './DialogItem.scss';
 import { format, isToday } from 'date-fns';
+import { generateAvatarFromHas } from '../../utils/helpers';
 
 const getMessageTime = (created_at) => {
 	const date = Date.parse(created_at);
@@ -11,14 +12,6 @@ const getMessageTime = (created_at) => {
 		return format(date, 'HH:mm');
 	} else {
 		return format(date, 'dd.MM.yyyy');
-	}
-};
-
-const getAvatar = (avatar) => {
-	if (avatar) {
-		return <img src={avatar} alt='avatar' />;
-	} else {
-		//make avatar
 	}
 };
 
@@ -31,7 +24,8 @@ const DialogItem = ({ user, text, created_at, unReaded, isMe }) => {
 		>
 			<div className='dialogs__item-avatar'>
 				{/* <img src={user.avatar} alt={`${user.fullName} avatar`} /> */}
-				{getAvatar(user.avatar)}
+				{/* {getAvatar(_id, user.avatar)} */}
+				<Avatar user={user} />
 			</div>
 			<div className='dialogs__item-info'>
 				<div className='dialogs__item-info-top'>

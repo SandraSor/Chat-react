@@ -1,0 +1,94 @@
+.chat-input {
+	display: flex;
+	align-items: center;
+	border: 1px solid #e9e9e9;
+	border-radius: 4px;
+	background-color: #fff;
+	padding: 3px 7px;
+
+	&__smile-btn {
+		button {
+			border: none;
+			box-shadow: none;
+			color: #202020 !important;
+			border-color: #202020 !important;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			div {
+				display: none;
+			}
+
+			svg {
+				height: 18px;
+				width: 18px;
+				opacity: 0.5;
+				cursor: pointer;
+				transition: opacity 0.15s ease-in-out;
+
+				// color: #9e9e9e;
+
+				&:hover {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	input {
+		border: none;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		letter-spacing: 0.1px;
+		// color: #b4b4b4;
+
+		&:focus {
+			border: none;
+			box-shadow: none;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100px;
+
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: none;
+			box-shadow: none;
+			color: #202020 !important;
+			border-color: #202020 !important;
+			div {
+				display: none;
+			}
+
+			&:nth-of-type(3) {
+				svg {
+					opacity: 0.7;
+					transition: opacity 0.15s ease-in-out;
+					&:hover {
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		svg {
+			height: 18px;
+			width: 18px;
+			opacity: 0.5;
+			cursor: pointer;
+			transition: opacity 0.15s ease-in-out;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+}

@@ -11,7 +11,7 @@ const validateFunc = ({ isAuth, errors, values }) => {
 			if (!value) {
 				errors.password = 'Введите пароль';
 			} else if (
-				!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i.test(
+				!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i.test(
 					value
 				)
 			) {
@@ -24,7 +24,7 @@ const validateFunc = ({ isAuth, errors, values }) => {
 			if (!value) {
 				errors.confirm = 'Повторите пароль';
 			} else if (
-				!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i.test(
+				!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i.test(
 					value
 				)
 			) {
