@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { Time, IconReaded } from '../';
+import { Time, IconReaded, Avatar } from '../';
 import { convertTime } from '../../utils/helpers';
 
 import './Message.scss';
@@ -19,6 +19,7 @@ const Message = ({
 	user,
 	text,
 	date,
+	created_at,
 	isMe,
 	isRead,
 	attachments,
@@ -66,7 +67,9 @@ const Message = ({
 		>
 			<div className='message__content'>
 				<div className='message__avatar'>
-					<img src={avatar} alt={`Avatar ${user.fullName}`} />
+					<Avatar user={user} />
+
+					{/* <img src={avatar} alt={`Avatar ${user.fullName}`} /> */}
 				</div>
 				<div className='message__info'>
 					{(audio || text || isTyping) && (
@@ -136,11 +139,16 @@ const Message = ({
 						</div>
 					)}
 
-					{date && (
+					{created_at && (
+						<span className='message__date'>
+							<Time date={created_at} />
+						</span>
+					)}
+					{/* {date && (
 						<span className='message__date'>
 							<Time date={date} />
 						</span>
-					)}
+					)} */}
 				</div>
 				<IconReaded isMe={isMe} isRead={isRead} />
 			</div>

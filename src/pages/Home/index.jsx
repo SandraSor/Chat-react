@@ -1,14 +1,14 @@
 import React from 'react';
-import { Messages, Status, ChatInput } from '../../components';
-import { Dialogs } from '../../containers';
-import { Input, Button } from 'antd';
+import { Status, ChatInput } from '../../components';
+import { Messages, Dialogs } from '../../containers';
+import { Button } from 'antd';
 import {
 	TeamOutlined,
 	FormOutlined,
 	EllipsisOutlined,
 } from '@ant-design/icons';
 
-import dialogsJson from '../../dialogs.json';
+// import dialogsJson from '../../dialogs.json';
 
 import './Home.scss';
 
@@ -28,7 +28,8 @@ const Home = () => {
 						<Button icon={<FormOutlined />} />
 					</div>
 					<div className='chat__sidebar-dialogs'>
-						<Dialogs myId={1} items={dialogsJson} />
+						<Dialogs myId={1} />
+						{/* <Dialogs myId={1} items={dialogsJson} /> */}
 					</div>
 				</div>
 				<div className='chat__dialog'>

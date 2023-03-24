@@ -1,5 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
+import { setCurrentDialogId } from '../../redux/reducers/dialogsSlice';
 
 import { Time, IconReaded, Avatar } from '../';
 import './DialogItem.scss';
@@ -15,12 +17,19 @@ const getMessageTime = (created_at) => {
 	}
 };
 
-const DialogItem = ({ user, text, created_at, unReaded, isMe }) => {
+const DialogItem = ({ _id, user, text, created_at, unReaded, isMe }) => {
+	const dispatch = useDispatch();
+
+	const onClickDialog = () => {
+		dispatch(setCurrentDialogId(_id));
+	};
+
 	return (
 		<div
 			className={classNames('dialogs__item', {
 				'dialogs__item-online': user.isOnline,
 			})}
+			onClick={onClickDialog}
 		>
 			<div className='dialogs__item-avatar'>
 				{/* <img src={user.avatar} alt={`${user.fullName} avatar`} /> */}
