@@ -5,7 +5,7 @@ import { fetchDialogs } from '../redux/reducers/dialogsSlice';
 
 const Dialogs = ({ myId }) => {
 	const dispatch = useDispatch();
-	const { items, status, currentDialog } = useSelector(
+	const { items, status, currentDialogId } = useSelector(
 		(state) => state.dialogs
 	);
 	const [inputValue, setInputValue] = React.useState('');
@@ -37,6 +37,7 @@ const Dialogs = ({ myId }) => {
 			items={filtered}
 			onSearch={onChangeInput}
 			inputValue={inputValue}
+			currentDialogId={currentDialogId}
 		/>
 	);
 };

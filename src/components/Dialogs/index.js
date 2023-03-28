@@ -5,7 +5,7 @@ import { DialogItem } from '..';
 import './Dialogs.scss';
 import orderBy from 'lodash/orderBy';
 
-const Dialogs = ({ items, myId, onSearch, inputValue }) => {
+const Dialogs = ({ items, myId, onSearch, inputValue, currentDialogId }) => {
 	return (
 		<>
 			<div className='dialogs__search'>
@@ -25,6 +25,7 @@ const Dialogs = ({ items, myId, onSearch, inputValue }) => {
 							<DialogItem
 								key={item._id}
 								unReaded={0}
+								currentDialogId={currentDialogId}
 								isMe={item.user._id === myId}
 								{...item}
 							/>

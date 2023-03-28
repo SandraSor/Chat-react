@@ -12,7 +12,7 @@ export const fetchMessages = createAsyncThunk(
 
 const initialState = {
 	items: null,
-	status: 'loading', //loading, success, error
+	status: 'success', //loading, success, error
 };
 
 export const messagesSlice = createSlice({
@@ -23,19 +23,19 @@ export const messagesSlice = createSlice({
 			state.items = action.payload;
 		},
 	},
-	extraReducers: {
-		[fetchMessages.pending]: (state) => {
+	extraReducers: (builder) => {
+		builder.addCase(fetchMessages.pending, (state) => {
 			state.status = 'loading';
 			state.items = [];
-		},
-		[fetchMessages.fulfilled]: (state, action) => {
+		});
+		builder.addCase(fetchMessages.fulfilled, (state, action) => {
 			state.items = action.payload;
 			state.status = 'success';
-		},
-		[fetchMessages.rejected]: (state) => {
+		});
+		builder.addCase(fetchMessages.rejected, (state) => {
 			state.status = 'error';
 			state.items = [];
-		},
+		});
 	},
 });
 

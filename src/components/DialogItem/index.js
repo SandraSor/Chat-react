@@ -17,7 +17,15 @@ const getMessageTime = (created_at) => {
 	}
 };
 
-const DialogItem = ({ _id, user, text, created_at, unReaded, isMe }) => {
+const DialogItem = ({
+	_id,
+	user,
+	text,
+	created_at,
+	unReaded,
+	isMe,
+	currentDialogId,
+}) => {
 	const dispatch = useDispatch();
 
 	const onClickDialog = () => {
@@ -27,7 +35,8 @@ const DialogItem = ({ _id, user, text, created_at, unReaded, isMe }) => {
 	return (
 		<div
 			className={classNames('dialogs__item', {
-				'dialogs__item-online': user.isOnline,
+				'dialogs__item--online': user.isOnline,
+				'dialogs__item--selected': currentDialogId === _id,
 			})}
 			onClick={onClickDialog}
 		>

@@ -19,7 +19,7 @@
 			}
 		}
 
-		&-online {
+		&--online {
 			#{$item}-avatar {
 				&::before {
 					content: '';

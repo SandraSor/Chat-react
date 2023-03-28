@@ -27,19 +27,19 @@ export const dialogsSlice = createSlice({
 			state.currentDialogId = action.payload;
 		},
 	},
-	extraReducers: {
-		[fetchDialogs.pending]: (state) => {
+	extraReducers: (builder) => {
+		builder.addCase(fetchDialogs.pending, (state) => {
 			state.status = 'loading';
 			state.items = [];
-		},
-		[fetchDialogs.fulfilled]: (state, action) => {
+		});
+		builder.addCase(fetchDialogs.fulfilled, (state, action) => {
 			state.items = action.payload;
 			state.status = 'success';
-		},
-		[fetchDialogs.rejected]: (state) => {
+		});
+		builder.addCase(fetchDialogs.rejected, (state) => {
 			state.status = 'error';
 			state.items = [];
-		},
+		});
 	},
 });
 

@@ -5,6 +5,9 @@ import classNames from 'classnames';
 import { Time, IconReaded, Avatar } from '../';
 import { convertTime } from '../../utils/helpers';
 
+import data from '@emoji-mart/data';
+import { init } from 'emoji-mart';
+
 import './Message.scss';
 
 import audioWave from '../../assets/img/AudioWave.svg';
@@ -14,6 +17,7 @@ import playSvg from '../../assets/img/play2.svg';
 import pauseSvg from '../../assets/img/pause2.svg';
 // import repeatSvg from '../../assets/img/repeat.svg';
 
+init({ data });
 const Message = ({
 	avatar,
 	user,
@@ -46,15 +50,28 @@ const Message = ({
 		isMounted.current = true;
 	};
 
-	React.useEffect(() => {
-		if (isMounted.current) {
-			setPercentage((+(currentTime / duration) * 100).toFixed(2));
-			if (currentTime === duration) {
-				setIsPlay(false);
-				// setCurrentTime(0);
-			}
-		}
-	}, [currentTime, duration]);
+	const getCurrentDuration = () => {
+		const duration = (audioRef.current && audioRef.current.duration) || 0;
+		setCurrentTime(audioRef.current.currentTime);
+		setPercentage((audioRef.current.currentTime / duration) * 100);
+	};
+
+	const onEndedAudio = () => {
+		setIsPlay(false);
+		setPercentage(0);
+		setCurrentTime(0);
+		isMounted.current = false;
+	};
+
+	// React.useEffect(() => {
+	// 	if (isMounted.current) {
+	// 		setPercentage((+(currentTime / duration) * 100).toFixed(2));
+	// 		if (currentTime === duration) {
+	// 			setIsPlay(false);
+	// 			// setCurrentTime(0);
+	// 		}
+	// 	}
+	// }, [currentTime, duration]);
 
 	return (
 		<div
@@ -74,7 +91,12 @@ const Message = ({
 				<div className='message__info'>
 					{(audio || text || isTyping) && (
 						<div className='message__bubble'>
-							{text && <p className='message__text'>{text}</p>}
+							{text && (
+								<p className='message__text'>
+									{text}
+									<em-emoji shortcodes=':+1::skin-tone-1:'></em-emoji>
+								</p>
+							)}
 							{isTyping && (
 								<div className='message__typing'>
 									<span />
@@ -88,17 +110,14 @@ const Message = ({
 										ref={audioRef}
 										src={audio}
 										onLoadedData={(event) => {
-											setDuration(event.currentTarget.duration);
+											// setDuration(event.currentTarget.duration);
+											setDuration(event.currentTarget.duration.toFixed(2));
 										}}
-										onTimeUpdate={(event) => {
-											setCurrentTime(event.currentTarget.currentTime);
-										}}
-										onEnded={() => {
-											// setPercentage(0);
-											// setCurrentTime(0);
-											console.log('End');
-										}}
-										// onTimeUpdate={checkEndedTime}
+										onTimeUpdate={getCurrentDuration}
+										// onTimeUpdate={(event) => {
+										// 	setCurrentTime(event.currentTarget.currentTime);
+										// }}
+										onEnded={onEndedAudio}
 										preload='auto'
 									></audio>
 									<div

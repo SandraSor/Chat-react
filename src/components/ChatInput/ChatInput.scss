@@ -36,6 +36,12 @@
 		}
 	}
 
+	&__emoji-picker {
+		position: absolute;
+		bottom: 55px;
+		z-index: 1;
+	}
+
 	input {
 		border: none;
 		font-weight: 400;
